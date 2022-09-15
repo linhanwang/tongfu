@@ -3,7 +3,7 @@
 #include <ostream>
 
 namespace tongfu {
-namespace containers {
+namespace container {
 
 template <typename E>
 class SLinkedList;
@@ -75,7 +75,7 @@ void SLinkedList<E>::removeFront() {
 }
 
 template <typename E>
-std::ostream& operator<<(std::ostream& out, const SLinkedList<E>& l) {
+inline std::ostream& operator<<(std::ostream& out, const SLinkedList<E>& l) {
     out << "[";
     SNode<E>* cursor = l.head;
     while (cursor != nullptr) {
@@ -86,5 +86,5 @@ std::ostream& operator<<(std::ostream& out, const SLinkedList<E>& l) {
     return out;
 }
 
-}  // namespace containers
+}  // namespace container
 }  // namespace tongfu

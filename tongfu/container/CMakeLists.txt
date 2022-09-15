@@ -1,0 +1,3 @@
+add_executable(singly_linked_list_test singly_linked_list_test.cpp)
+
+add_executable(doubly_linked_list_test doubly_linked_list_test.cpp)

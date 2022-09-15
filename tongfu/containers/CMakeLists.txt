@@ -1,1 +1,0 @@
-add_executable(singly_linked_list_test singly_linked_list_test.cpp)

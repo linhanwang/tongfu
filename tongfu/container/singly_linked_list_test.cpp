@@ -1,9 +1,9 @@
-#include "tongfu/containers/singly_linked_list.h"
+#include "tongfu/container/singly_linked_list.h"
 
 #include <iostream>
 #include <string>
 
-using namespace tongfu::containers;
+using namespace tongfu::container;
 
 int main() {
     SLinkedList<int> l;
