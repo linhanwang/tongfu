@@ -3,7 +3,6 @@
 #include <ostream>
 
 namespace tongfu {
-namespace container {
 
 template <typename E>
 class SLinkedList;
@@ -86,5 +85,4 @@ inline std::ostream& operator<<(std::ostream& out, const SLinkedList<E>& l) {
     return out;
 }
 
-}  // namespace container
 }  // namespace tongfu

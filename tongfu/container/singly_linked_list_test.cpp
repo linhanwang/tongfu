@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-using namespace tongfu::container;
+using namespace tongfu;
 
 int main() {
     SLinkedList<int> l;

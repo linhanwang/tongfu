@@ -4,7 +4,6 @@
 #include <ostream>
 
 namespace tongfu {
-namespace container {
 
 template <typename E>
 class DLinkedList;
@@ -42,7 +41,7 @@ class DLinkedList {
     void removeFront();
     void removeBack();
 
-    template<typename Entry>
+    template <typename Entry>
     friend std::ostream& operator<<(std::ostream&, const DLinkedList<Entry>&);
 
    protected:
@@ -132,5 +131,4 @@ inline std::ostream& operator<<(std::ostream& out, const DLinkedList<E>& l) {
     return out;
 }
 
-}  // namespace container
 }  // namespace tongfu
