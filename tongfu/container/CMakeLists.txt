@@ -3,3 +3,5 @@ add_executable(singly_linked_list_test singly_linked_list_test.cpp)
 add_executable(doubly_linked_list_test doubly_linked_list_test.cpp)
 
 add_executable(circularly_linked_list_test circularly_linked_list_test.cpp)
+
+add_executable(linked_stack_test linked_stack_test.cpp)
