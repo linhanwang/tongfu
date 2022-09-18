@@ -13,3 +13,5 @@ add_executable(linked_deque_test linked_deque_test.cpp)
 add_executable(node_list_test node_list_test.cpp)
 
 add_executable(linked_binary_tree_test linked_binary_tree_test.cpp)
+
+add_executable(euler_tour_test euler_tour_test.cpp)
