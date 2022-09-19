@@ -17,3 +17,5 @@ add_executable(linked_binary_tree_test linked_binary_tree_test.cpp)
 add_executable(euler_tour_test euler_tour_test.cpp)
 
 add_executable(heap_priority_queue_test heap_priority_queue_test.cpp)
+
+add_executable(hash_map_test hash_map_test.cpp)
