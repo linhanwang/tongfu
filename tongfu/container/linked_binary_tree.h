@@ -19,14 +19,21 @@ class LinkedBinaryTree {
         Node* node;
 
        public:
-        Position(Node* n) : node(n) {}
+        Position(Node* n = nullptr) : node(n) {}
         E& operator*() { return node->elem; }
+        const E& operator*() const { return node->elem; }
+        bool operator==(const Position& p) const { return node == p.node; }
+        bool operator!=(const Position& p) const { return node != p.node; }
         Position left() const { return Position(node->left); }
         Position right() const { return Position(node->right); }
         Position parent() const { return Position(node->parent); }
         bool isRoot() const { return node->parent == nullptr; }
         bool isExternal() const {
             return (node->left == nullptr) && (node->right == nullptr);
+        }
+
+        bool isInternal() const {
+            return !isExternal();
         }
 
         friend class LinkedBinaryTree<E>;
@@ -85,6 +92,9 @@ void LinkedBinaryTree<E>::expandExternal(const Position& p) {
     n += 2;
 }
 
+/*
+ * remove a external node and its parent
+ * */
 template <typename E>
 typename LinkedBinaryTree<E>::Position LinkedBinaryTree<E>::removeAboveExternal(
     const Position& p) {
