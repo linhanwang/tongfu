@@ -1,4 +1,5 @@
 #include <list>
+#include <cassert>
 
 namespace tongfu {
 
@@ -50,9 +51,12 @@ class LinkedBinaryTree {
     void addRoot();
     void expandExternal(const Position& p);
     Position removeAboveExternal(const Position& p);
+    Position restructure(const Position& p);
+    void rotate(const Position& p);
 
    protected:
     void preorder(Node* n, PositonList& pl) const;
+    void relink(Node* parent, Node* child, bool makeLeftChild);
 
    private:
     Node* _root;
@@ -133,6 +137,53 @@ void LinkedBinaryTree<E>::preorder(Node* n, PositonList& pl) const {
 
     preorder(n->left, pl);
     preorder(n->right, pl);
+}
+
+template<typename E>
+void LinkedBinaryTree<E>::relink(Node* parent, Node* child, bool makeLeftChild) {
+    child->parent = parent;
+    if (makeLeftChild) parent->left = child;
+    else parent->right = child;
+}
+
+template<typename E>
+void LinkedBinaryTree<E>::rotate(const Position& p) {
+    assert(p.node);
+    assert(p.node->parent);
+
+    Node* x = p.node;
+    Node* y = x->parent;                    // we assume this exists
+    Node* z = y->parent;                    // grandparent (possibley null)
+    if (z == nullptr) {
+        _root = x;                          // x becomes root of the tree
+        x->parent = nullptr;
+    } else {
+        relink(z, x, y == z->left);         // x becomes direct child of z
+    }
+
+    // now rotate x and y, including transfer of middle subtree
+    if (x == y->left) {
+        relink(y, x->right, true);        // x's right child becomes y's left
+        relink(x, y, false);              // y becomes x's right child
+    } else {
+        relink(y, x->left, false);        // x's left becomes y's left
+        relink(x, y, true);               // y becomes left child of x
+    }
+}
+
+template <typename E>
+typename LinkedBinaryTree<E>::Position LinkedBinaryTree<E>::restructure(
+    const Position& x) {
+    Position y = x.parent();
+    Position z = y.parent();
+    if ((x == y.right()) == (y == z.right())) { // matching alignments
+        rotate(y);                              // single rotation(of y)
+        return y;                               // y is new subtree root
+    } else {                                    // opposite alignments
+        rotate(x);                              // double rotation (of x)
+        rotate(x);
+        return x;                               // x is new subtree root
+    }
 }
 
 }  // namespace tongfu
