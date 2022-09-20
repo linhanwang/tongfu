@@ -1,5 +1,6 @@
-#include <iostream>
 #include "tongfu/container/search_tree.h"
+
+#include <iostream>
 
 using namespace tongfu;
 
@@ -10,12 +11,12 @@ int main() {
 
     std::cout << "size should be 1: " << st.size() << std::endl;
 
-    st.insert(2,2);
-    st.insert(6,6);
-    st.insert(4,4);
-    st.insert(3,3);
+    st.insert(2, 2);
+    st.insert(6, 6);
+    st.insert(4, 4);
+    st.insert(3, 3);
     st.insert(3, 6);
-    st.insert(5,5);
+    st.insert(5, 5);
 
     std::cout << "size should be 7: " << st.size() << std::endl;
 
@@ -24,7 +25,7 @@ int main() {
         std::cout << (*iter).key() << " : " << (*iter).value() << std::endl;
         ++iter;
     }
-    
+
     std::cout << "find(3) should be 3: " << (*st.find(3)).value() << std::endl;
 
     st.erase(2);
