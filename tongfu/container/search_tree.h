@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 
 #include "tongfu/container/entry.h"
 #include "tongfu/container/linked_binary_tree.h"
@@ -24,6 +25,19 @@ class SearchTree {
    protected:
     using BinaryTree = LinkedBinaryTree<E>;
     using TPos = typename BinaryTree::Position;
+   public:
+    void printBTWithExternal() const {
+        typename BinaryTree::PositonList pl = T.positions();
+        std::cout << "[";
+        for (auto p : pl) {
+            if (p.isExternal()) std::cout << "E";
+            else std::cout << *p;
+            std::cout << ",";
+        }
+        std::cout << "]" << std::endl;
+    }
+
+   protected:
     TPos root() const;
     TPos finder(const K& k, const TPos& v);
     TPos inserter(const K& k, const V& v);

@@ -32,10 +32,6 @@ public:
         rebalanceDelete(n);
     }
 
-    void erase(const Iterator& p) {
-        erase(p);
-    }
-
     void debug() {
         std::cout << "size: " << ST::size() << " height: " << height(ST::root())
             << std::endl;

@@ -39,7 +39,6 @@ class AVLTree : public SearchTree<K, V, AVLEntry<K, V>> {
     AVLTree();
     Iterator insert(const K& k, const V& x);
     void erase(const K& k);
-    void erase(const Iterator& p);
     void debug() {
         std::cout << "size: " << ST::size() << " height: " << height(ST::root())
                   << std::endl;
