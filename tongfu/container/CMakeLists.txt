@@ -23,3 +23,5 @@ add_executable(hash_map_test hash_map_test.cpp)
 add_executable(search_tree_test search_tree_test.cpp)
 
 add_executable(avl_tree_test avl_tree_test.cpp)
+
+add_executable(splay_tree_test splay_tree_test.cpp)

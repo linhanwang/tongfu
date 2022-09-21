@@ -29,6 +29,7 @@ class SearchTree {
     TPos inserter(const K& k, const V& v);
     TPos eraser(TPos& v);
     TPos restructure(const TPos& v);
+    void rotate(const TPos& v);
 
    private:
     BinaryTree T;
@@ -173,6 +174,12 @@ template <typename K, typename V, typename E>
 typename SearchTree<K, V, E>::TPos SearchTree<K, V, E>::restructure(
     const TPos& p) {
     return T.restructure(p);
+}
+
+template <typename K, typename V, typename E>
+void SearchTree<K, V, E>::rotate(
+    const TPos& p) {
+    T.rotate(p);
 }
 
 }  // namespace tongfu

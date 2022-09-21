@@ -1,15 +1,13 @@
-#include "tongfu/container/avl_tree.h"
-
-#include <iostream>
+#include "tongfu/container/splay_tree.h"
 #include <random>
-#include <vector>
+#include <iostream>
 
 using namespace tongfu;
 
 int main() {
     {
         std::cout << "Binary search tree tests:" << std::endl;
-        AVLTree<int, int> tree;
+        SplayTree<int, int> tree;
 
         tree.insert(1, 1);
 
@@ -30,28 +28,30 @@ int main() {
             ++iter;
         }
 
-        std::cout << "find(3) should be 3: " << (*tree.find(3)).value()
+        std::cout << "find(3) should be 3 or 6: " << (*tree.find(3)).value()
                   << std::endl;
 
         tree.erase(2);
         tree.erase(4);
 
         std::cout << "size should be 5: " << tree.size() << std::endl;
-        std::cout << "find(3) should be 3: " << (*tree.find(3)).value()
+        std::cout << "find(3) should be 3 or 6: " << (*tree.find(3)).value()
                   << std::endl;
 
         tree.erase(3);
-        std::cout << "find(3) should be 6: " << (*tree.find(3)).value()
+        std::cout << "find(3) should be 3 or 6: " << (*tree.find(3)).value()
+                  << std::endl;
+        std::cout << "find(5) should be 5: " << (*tree.find(5)).value()
                   << std::endl;
     }
-
+    
     {
         std::cout << "AVL tree tests: " << std::endl;
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> distrib(1, 10000);
 
-        AVLTree<int, int> tree;
+        SplayTree<int, int> tree;
         std::vector<int> keys;
         for (int i = 0; i < 1024; ++i) {
             int v = distrib(gen);
@@ -76,6 +76,5 @@ int main() {
             }
         }
     }
-
     return 0;
 }
