@@ -1,0 +1,1 @@
+add_executable(merge_sort_test merge_sort_test.cpp)
