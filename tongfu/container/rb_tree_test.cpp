@@ -22,7 +22,7 @@ int main() {
         tree.insert(3, 6);
         tree.insert(5, 5);
 
-        tree.printBTWithExternal(); 
+        tree.printBT(); 
 
         std::cout << "size should be 7: " << tree.size() << std::endl;
 
@@ -68,17 +68,19 @@ int main() {
             tree.insert(key, key);
         }
 
-
-        for (auto key : keys) {
-            if (key % 2 == 0) tree.erase(key);
-        }
-
-
         for (auto key : keys) {
             if (key % 2 == 1) {
                 assert((*tree.find(key)).value() == key);
             }
         }
+
+        std::cout << "RB tree sanity: " << tree.sanityCheck() << std::endl;
+        
+        for (auto key : keys) {
+            if (key % 2 == 0) tree.erase(key);
+        }
+
+        std::cout << "RB tree sanity: " << tree.sanityCheck() << std::endl;
     }
 
     return 0;

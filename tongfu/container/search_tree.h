@@ -36,6 +36,15 @@ class SearchTree {
         }
         std::cout << "]" << std::endl;
     }
+    
+    void printBT() const {
+        typename BinaryTree::PositonList pl = T.positions();
+        std::cout << "[";
+        for (auto p : pl) {
+            std::cout << *p << ",";
+        }
+        std::cout << "]" << std::endl;
+    }
 
    protected:
     TPos root() const;
@@ -45,7 +54,7 @@ class SearchTree {
     TPos restructure(const TPos& v);
     void rotate(const TPos& v);
 
-   private:
+   protected:
     BinaryTree T;
     int n;
 
