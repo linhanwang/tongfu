@@ -7,3 +7,5 @@ add_executable(radix_sort_test radix_sort_test.cpp)
 add_executable(count_sort_test count_sort_test.cpp)
 
 add_executable(LSD_test LSD_test.cpp)
+
+add_executable(MSD_test MSD_test.cpp)
