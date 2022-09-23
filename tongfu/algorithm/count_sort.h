@@ -9,22 +9,18 @@ class CountingSort {
             auto minMax = std::minmax_element(keys.begin(), keys.end());
             int minNum = *minMax.first;
             int maxNum = *minMax.second;
-            std::vector<int> counts(maxNum - minNum + 1, 0);
+            std::vector<int> counts(maxNum - minNum + 2, 0);
             for (int num : keys) {
-                counts[num - minNum]++;
+                counts[num - minNum + 1]++;
             }
 
-            int total = 0;
-            for (int i = 0; i < counts.size(); ++i) {
-                int c = counts[i];
-                counts[i] = total;
-                total = total + c;
+            for (int i = 0; i < counts.size() - 1; ++i) {
+                counts[i+ 1] += counts[i];
             }
 
             std::vector<int> aux(keys.size(), 0);
             for (int num : keys) {
-                aux[counts[num - minNum]] = num;
-                counts[num - minNum]++;
+                aux[counts[num - minNum]++] = num;
             }
             std::swap(keys, aux);
         }
