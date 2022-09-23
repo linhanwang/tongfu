@@ -33,9 +33,6 @@ int main() {
         MSD::sort(a);
 
         std::cout << "a should be sorted: " << std::is_sorted(a.begin(), a.end()) << std::endl;
-        for (auto& s : a) {
-            std::cout << s << std::endl;
-        }
     }
 
     return 0;
