@@ -1,6 +1,7 @@
 #include <climits>
 #include <string>
 #include <vector>
+#include <array>
 
 namespace tongfu {
 
@@ -11,10 +12,10 @@ class TrieST {
 
    private:
     struct Node {
-        Node() : val(kNull), next(TrieST::R, nullptr) {}
+        Node() : val(kNull), next{nullptr} {}
 
         int val;
-        std::vector<Node*> next;
+        std::array<Node*, R> next;
     };
 
     Node* root;
