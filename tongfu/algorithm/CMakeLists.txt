@@ -9,3 +9,9 @@ add_executable(count_sort_test count_sort_test.cpp)
 add_executable(LSD_test LSD_test.cpp)
 
 add_executable(MSD_test MSD_test.cpp)
+
+add_executable(depth_first_search_test depth_first_search_test.cpp)
+
+add_executable(depth_first_paths_test depth_first_paths_test.cpp)
+
+add_executable(bread_first_paths_test bread_first_paths_test.cpp)
