@@ -15,3 +15,5 @@ add_executable(depth_first_search_test depth_first_search_test.cpp)
 add_executable(depth_first_paths_test depth_first_paths_test.cpp)
 
 add_executable(bread_first_paths_test bread_first_paths_test.cpp)
+
+add_executable(connected_components_test connected_components_test.cpp)
