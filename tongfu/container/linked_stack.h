@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cassert>
 
 #include "tongfu/container/singly_linked_list.h"

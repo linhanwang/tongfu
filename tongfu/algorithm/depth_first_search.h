@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 #include "tongfu/algorithm/graph.h"
@@ -12,9 +14,7 @@ class DepthFirstSearch {
 
     int count() const { return count_; }
 
-    bool marked(int v) const {
-        return marked_[v];
-    }
+    bool marked(int v) const { return marked_[v]; }
 
    private:
     void dfs(Graph& g, int v) {

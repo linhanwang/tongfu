@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
@@ -58,7 +60,7 @@ class MSD {
             int c = charAt(a[i], d);
             aux[count[c + 1]++] = a[i];
         }
-        
+
         // copy back
         for (int i = lo; i <= hi; ++i) a[i] = aux[i - lo];
 

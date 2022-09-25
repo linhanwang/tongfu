@@ -1,9 +1,11 @@
+#pragma once
+
 #include <vector>
 
 namespace tongfu {
 
 class Quick {
-private:
+   private:
     static int partition(std::vector<int>& a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
@@ -14,7 +16,7 @@ private:
             }
 
             while (a[--j] > v) {
-                if (j == lo) break; // redundant since a[lo] acts as sentinel
+                if (j == lo) break;  // redundant since a[lo] acts as sentinel
             }
 
             if (i >= j) break;
@@ -31,7 +33,8 @@ private:
         sort(a, lo, j - 1);
         sort(a, j + 1, hi);
     }
-public:
+
+   public:
     static void sort(std::vector<int>& a) {
         // todo: shuffle a
         sort(a, 0, a.size() - 1);

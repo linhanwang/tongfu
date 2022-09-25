@@ -1,10 +1,13 @@
-#include "tongfu/container/doubly_linked_list.h"
-#include "tongfu/container/search_tree.h"
+#pragma once
+
 #include <cassert>
 #include <cstdlib>
 #include <iostream>
 #include <ostream>
 #include <utility>
+
+#include "tongfu/container/doubly_linked_list.h"
+#include "tongfu/container/search_tree.h"
 
 namespace tongfu {
 
@@ -29,11 +32,11 @@ class RBEntry : public Entry<K, V> {
         : Entry<K, V>(k, v), col(BLACK) {}
     friend class RBTree<K, V>;
 
-    template<typename X, typename Y>
+    template <typename X, typename Y>
     friend std::ostream& operator<<(std::ostream&, const RBEntry<X, Y>&);
 };
 
-template<typename X, typename Y>
+template <typename X, typename Y>
 inline std::ostream& operator<<(std::ostream& out, const RBEntry<X, Y>& e) {
     if (e.isRed()) {
         out << "R";
@@ -44,15 +47,17 @@ inline std::ostream& operator<<(std::ostream& out, const RBEntry<X, Y>& e) {
     return out;
 }
 
-template<typename K, typename V>
+template <typename K, typename V>
 class RBTree : public SearchTree<K, V, RBEntry<K, V>> {
-public:
+   public:
     using RBEntry = tongfu::RBEntry<K, V>;
     using Iterator = typename SearchTree<K, V, RBEntry>::Iterator;
-protected:
+
+   protected:
     using ST = SearchTree<K, V, RBEntry>;
     using TPos = typename ST::TPos;
-public:
+
+   public:
     Iterator insert(const K& k, const V& x) {
         TPos v = ST::inserter(k, x);
         if (v == ST::root()) {
@@ -72,13 +77,14 @@ public:
         Color col = item.second;
         if (col == RED) return;
 
-        if ((*r).isRed())                 // deleted parent was black
-            setBlack(r);                  // so this restores black depth
+        if ((*r).isRed())  // deleted parent was black
+            setBlack(r);   // so this restores black depth
         else {
-             if (!r.isExternal()) {
-                 std::cout << "deleted node color isRed: " << (col == RED) << std::endl;
-                 std::abort();
-             }
+            if (!r.isExternal()) {
+                std::cout << "deleted node color isRed: " << (col == RED)
+                          << std::endl;
+                std::abort();
+            }
             if (r == ST::root()) return;
             remedyDoubleBlack(r);
         }
@@ -106,9 +112,7 @@ public:
     }
 
     /* Ensure that current tree structure is valid RB tree (for debug only)*/
-    bool sanityCheck() {
-        return sanityRecurse(ST::root()) != -1;
-    }
+    bool sanityCheck() { return sanityRecurse(ST::root()) != -1; }
 
    protected:
     void remedyDoubleRed(const TPos& p) {
@@ -145,8 +149,10 @@ public:
                 setBlack(middle.right());
             } else {  // Case 2: recoloring
                 setRed(y);
-                if ((*z).isRed()) setBlack(z);
-                else if (z != ST::root()) remedyDoubleBlack(z);
+                if ((*z).isRed())
+                    setBlack(z);
+                else if (z != ST::root())
+                    remedyDoubleBlack(z);
             }
         } else {  // Case 3: adjustment
             ST::rotate(y);
@@ -161,13 +167,16 @@ public:
      * */
     int sanityRecurse(const TPos& p) {
         if (p.isExternal()) {
-            if ((*p).isRed()) return -1;
-            else return 0;
+            if ((*p).isRed())
+                return -1;
+            else
+                return 0;
         } else {
             if ((p == ST::root()) && (*p).isRed()) return -1;
             TPos left = p.left();
             TPos right = p.right();
-            if ((*p).isRed() && ((*left).isRed() || (*right).isRed())) return -1;
+            if ((*p).isRed() && ((*left).isRed() || (*right).isRed()))
+                return -1;
 
             int a = sanityRecurse(left);
             if (a == -1) return -1;
@@ -178,9 +187,7 @@ public:
         }
     }
 
-    bool wasParentRed(const TPos& p) {
-        return (*p.parent()).isRed();
-    }
+    bool wasParentRed(const TPos& p) { return (*p.parent()).isRed(); }
 
     TPos sibling(const TPos& p) {
         TPos parent = p.parent();
@@ -191,17 +198,11 @@ public:
             return parent.left();
     }
 
-    void setBlack(TPos p) {
-        (*p).setColor(BLACK);
-    }
+    void setBlack(TPos p) { (*p).setColor(BLACK); }
 
-    void setRed(TPos p) {
-        (*p).setColor(RED);
-    }
+    void setRed(TPos p) { (*p).setColor(RED); }
 
-    void setColor(TPos p, Color c) {
-        (*p).setColor(c);
-    }
+    void setColor(TPos p, Color c) { (*p).setColor(c); }
 };
 
 }  // namespace tongfu

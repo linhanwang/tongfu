@@ -19,3 +19,5 @@ add_executable(bread_first_paths_test bread_first_paths_test.cpp)
 add_executable(connected_components_test connected_components_test.cpp)
 
 add_executable(cycle_test cycle_test.cpp)
+
+add_executable(two_color_test two_color_test.cpp)

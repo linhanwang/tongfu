@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cassert>
 
 #include "tongfu/container/doubly_linked_list.h"

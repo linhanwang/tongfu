@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 
 #include "tongfu/container/linked_binary_tree.h"
