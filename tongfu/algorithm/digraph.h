@@ -1,25 +1,44 @@
 #pragma once
 
-#include <iostream>
 #include <vector>
+#include <iostream>
 
 namespace tongfu {
 
-class Graph {
+class Digraph {
    public:
-    Graph(int v) : V_(v), adj_(v) {}
+    Digraph(int v) : V_(v), adj_(v) {}
 
     int V() const { return V_; }
 
     int E() const { return E_; }
 
+    /*
+     * directed edge v -> w
+     * */
     void addEdge(int v, int w) {
         adj_[v].push_back(w);
-        adj_[w].push_back(v);
         ++E_;
     }
 
+    /*
+     * add v->w and w->v two edges
+     * */
+    void addBiEdge(int v, int w) {
+        addEdge(v, w);
+        addEdge(w, v);
+    }
+
     const std::vector<int>& adj(int v) const { return adj_[v]; }
+
+    Digraph reverse() const {
+        Digraph R(V_);
+        for (int v = 0; v < V_; ++v)
+            for (int w : adj_[v])
+                R.addEdge(w, v);
+
+        return R;
+    }
 
    private:
     int V_;
@@ -27,10 +46,10 @@ class Graph {
     std::vector<std::vector<int>> adj_;
 };
 
-inline Graph buildGraphFromStdin() {
+inline Digraph buildDigraphFromStdin() {
     int v, e;
     std::cin >> v >> e;
-    Graph g(v);
+    Digraph g(v);
     for (int i = 0; i < e; ++i) {
         int s, d;
         std::cin >> s >> d;

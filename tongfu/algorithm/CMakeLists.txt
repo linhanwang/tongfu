@@ -21,3 +21,9 @@ add_executable(connected_components_test connected_components_test.cpp)
 add_executable(cycle_test cycle_test.cpp)
 
 add_executable(two_color_test two_color_test.cpp)
+
+add_executable(directed_dfs_test directed_dfs_test.cpp)
+
+add_executable(directed_cycle_test directed_cycle_test.cpp)
+
+add_executable(depth_first_order_test depth_first_order_test.cpp)
