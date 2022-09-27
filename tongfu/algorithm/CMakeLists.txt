@@ -29,3 +29,5 @@ add_executable(directed_cycle_test directed_cycle_test.cpp)
 add_executable(depth_first_order_test depth_first_order_test.cpp)
 
 add_executable(kosaraju_scc_test kosaraju_scc_test.cpp)
+
+add_executable(edge_weighted_graph_test edge_weighted_graph_test.cpp)
