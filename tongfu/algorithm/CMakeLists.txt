@@ -27,3 +27,5 @@ add_executable(directed_dfs_test directed_dfs_test.cpp)
 add_executable(directed_cycle_test directed_cycle_test.cpp)
 
 add_executable(depth_first_order_test depth_first_order_test.cpp)
+
+add_executable(kosaraju_scc_test kosaraju_scc_test.cpp)
