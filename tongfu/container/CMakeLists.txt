@@ -31,3 +31,5 @@ add_executable(rb_tree_test rb_tree_test.cpp)
 add_executable(UF_test UF_test.cpp)
 
 add_executable(trie_test trie_test.cpp)
+
+add_executable(index_priority_queue_test index_priority_queue_test.cpp)
