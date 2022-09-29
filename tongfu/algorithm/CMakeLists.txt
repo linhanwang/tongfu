@@ -37,3 +37,5 @@ add_executable(lazy_prime_mst_test lazy_prime_mst_test.cpp)
 add_executable(prime_mst_test prime_mst_test.cpp)
 
 add_executable(kruskal_mst_test kruskal_mst_test.cpp)
+
+add_executable(edge_weighted_digraph_test edge_weighted_digraph_test.cpp)
