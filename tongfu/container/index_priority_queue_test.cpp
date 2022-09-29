@@ -14,6 +14,10 @@ int main() {
     pq.insert(4, 1.0);
     pq.insert(5, 0.0);
 
+    std::cout << "pq contains 3: " << pq.contains(3) << std::endl;
+
+    pq.changeKey(3, 6.0);
+
     std::cout << "topIndex: " << pq.topIndex() << " topKey: " << pq.topKey()
               << std::endl;
     pq.pop();
