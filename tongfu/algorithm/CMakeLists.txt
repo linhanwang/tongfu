@@ -41,3 +41,5 @@ add_executable(kruskal_mst_test kruskal_mst_test.cpp)
 add_executable(edge_weighted_digraph_test edge_weighted_digraph_test.cpp)
 
 add_executable(dijkstra_sp_test dijkstra_sp_test.cpp)
+
+add_executable(acyclic_sp_test acyclic_sp_test.cpp)
