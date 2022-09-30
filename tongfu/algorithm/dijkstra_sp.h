@@ -1,42 +1,19 @@
-#include <functional>
-#include <limits>
 #include <queue>
-#include <vector>
 
-#include "tongfu/algorithm/edge_weighted_digraph.h"
+#include "tongfu/algorithm/sp.h"
 #include "tongfu/container/index_priority_queue.h"
 
 namespace tongfu {
 
-class DijkstraSP {
-    static constexpr double DMax = std::numeric_limits<double>::max();
-
+class DijkstraSP : public SP {
    public:
-    DijkstraSP(EdgeWeightedDigraph& g, int s)
-        : edgeTo_(g.V(), DirectedEdge(-1, -1, DMax)),
-          pq_(g.V()),
-          distTo_(g.V(), DMax) {
-        distTo_[s] = 0.0;
+    DijkstraSP(EdgeWeightedDigraph& g, int s) : SP(g, s), pq_(g.V()) {
         pq_.insert(s, 0.0);
         while (!pq_.isEmpty()) {
             int v = pq_.topIndex();
             pq_.pop();
             relax(g, v);
         }
-    }
-
-    double distTo(int v) const { return distTo_[v]; }
-
-    bool hasPathTo(int v) const { return distTo_[v] < DMax; }
-
-    std::vector<DirectedEdge> pathTo(int v) const {
-        if (!hasPathTo(v)) return {};
-        std::vector<DirectedEdge> path;
-        for (DirectedEdge e = edgeTo_[v]; e.weight() != DMax;
-             e = edgeTo_[e.from()])
-            path.push_back(e);
-        std::reverse(path.begin(), path.end());
-        return path;
     }
 
    private:
@@ -55,18 +32,14 @@ class DijkstraSP {
     }
 
    private:
-    std::vector<DirectedEdge> edgeTo_;
-    std::vector<double> distTo_;
     IndexPQ<double, std::greater<double>> pq_;
 };
 
-class DijkstraSPSimple {
-    static constexpr double DMax = std::numeric_limits<double>::max();
+class DijkstraSPSimple : public SP {
     using Pair = std::pair<double, int>;
 
    public:
-    DijkstraSPSimple(EdgeWeightedDigraph& g, int s)
-        : edgeTo_(g.V(), DirectedEdge(-1, -1, DMax)), distTo_(g.V(), DMax) {
+    DijkstraSPSimple(EdgeWeightedDigraph& g, int s) : SP(g, s) {
         distTo_[s] = 0.0;
         pq_.push({0.0, s});
         while (!pq_.empty()) {
@@ -74,20 +47,6 @@ class DijkstraSPSimple {
             pq_.pop();
             relax(g, v);
         }
-    }
-
-    double distTo(int v) const { return distTo_[v]; }
-
-    bool hasPathTo(int v) const { return distTo_[v] < DMax; }
-
-    std::vector<DirectedEdge> pathTo(int v) const {
-        if (!hasPathTo(v)) return {};
-        std::vector<DirectedEdge> path;
-        for (DirectedEdge e = edgeTo_[v]; e.weight() != DMax;
-             e = edgeTo_[e.from()])
-            path.push_back(e);
-        std::reverse(path.begin(), path.end());
-        return path;
     }
 
    private:
@@ -103,8 +62,6 @@ class DijkstraSPSimple {
     }
 
    private:
-    std::vector<DirectedEdge> edgeTo_;
-    std::vector<double> distTo_;
     std::priority_queue<Pair, std::vector<Pair>, std::greater<Pair>> pq_;
 };
 
