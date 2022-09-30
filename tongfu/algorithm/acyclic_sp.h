@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "tongfu/algorithm/sp.h"
 
 namespace tongfu {
