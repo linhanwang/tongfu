@@ -22,5 +22,16 @@ int main(int argc, char** argv) {
         std::cout << std::endl;
     }
 
+    DijkstraSPSimple spSimple(g, 0);
+
+    for (int t = 0; t < g.V(); ++t) {
+        std::cout << 0 << " to " << t << ": " << spSimple.distTo(t) << "  ";
+        if (spSimple.hasPathTo(t))
+            for (DirectedEdge e : spSimple.pathTo(t))
+                std::cout << e << "  ";
+        std::cout << std::endl;
+    }
+
+
     return 0;
 }

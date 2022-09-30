@@ -1,5 +1,6 @@
 #include <functional>
 #include <limits>
+#include <queue>
 #include <vector>
 
 #include "tongfu/algorithm/edge_weighted_digraph.h"
@@ -57,6 +58,54 @@ class DijkstraSP {
     std::vector<DirectedEdge> edgeTo_;
     std::vector<double> distTo_;
     IndexPQ<double, std::greater<double>> pq_;
+};
+
+class DijkstraSPSimple {
+    static constexpr double DMax = std::numeric_limits<double>::max();
+    using Pair = std::pair<double, int>;
+
+   public:
+    DijkstraSPSimple(EdgeWeightedDigraph& g, int s)
+        : edgeTo_(g.V(), DirectedEdge(-1, -1, DMax)), distTo_(g.V(), DMax) {
+        distTo_[s] = 0.0;
+        pq_.push({0.0, s});
+        while (!pq_.empty()) {
+            int v = pq_.top().second;
+            pq_.pop();
+            relax(g, v);
+        }
+    }
+
+    double distTo(int v) const { return distTo_[v]; }
+
+    bool hasPathTo(int v) const { return distTo_[v] < DMax; }
+
+    std::vector<DirectedEdge> pathTo(int v) const {
+        if (!hasPathTo(v)) return {};
+        std::vector<DirectedEdge> path;
+        for (DirectedEdge e = edgeTo_[v]; e.weight() != DMax;
+             e = edgeTo_[e.from()])
+            path.push_back(e);
+        std::reverse(path.begin(), path.end());
+        return path;
+    }
+
+   private:
+    void relax(EdgeWeightedDigraph& g, int v) {
+        for (DirectedEdge e : g.adj(v)) {
+            int w = e.to();
+            if (distTo_[w] > distTo_[v] + e.weight()) {
+                distTo_[w] = distTo_[v] + e.weight();
+                edgeTo_[w] = e;
+                pq_.push({e.weight(), w});  // add redundant instead of change
+            }
+        }
+    }
+
+   private:
+    std::vector<DirectedEdge> edgeTo_;
+    std::vector<double> distTo_;
+    std::priority_queue<Pair, std::vector<Pair>, std::greater<Pair>> pq_;
 };
 
 }  // namespace tongfu
